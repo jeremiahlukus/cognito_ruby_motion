@@ -9,17 +9,7 @@ class AppDelegate < PM::Delegate
 
   def on_load(app, options)
     cdq.setup # Remove this if you aren't using CDQ
-    if false
-      header = { "Allow" => "*"}
-      ApiClient.update_authorization_header(header)
-      open_authenticated_root
-    else
-      open SignInScreen.new(nav_bar: true)
-    end
-  end
-
-  def open_authenticated_root
-    open_tab_bar HomeScreen.new(nav_bar: true)#, HomeScreen.new(nav_bar: false)
+    open HomeScreen.new(nav_bar: true)
   end
 
   # Remove this if you are only supporting portrait
