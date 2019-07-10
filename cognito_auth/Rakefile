@@ -10,7 +10,7 @@ Bundler.require
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings
-
+  app.files << Dir.glob("./config/*.rb")
   app.name = 'cognito_auth'
   app.identifier = 'com.jparrack.cognito_auth'
   app.codesign_certificate = 'iPhone Developer: Jeremiah Parrack'
@@ -49,12 +49,24 @@ Motion::Project::App.setup do |app|
   # app.vendor_project('vendor/Flurry', :static)
   # app.vendor_project('vendor/DSLCalendarView', :static, :cflags => '-fobjc-arc') # Using arc
 
+  # app.info_plist['AWS']['CognitoUserPool']['default'] = [
+  #   {
+  #     'CognitoAuthSignInRedirectUri' => 'myapp://SETME',
+  #     'CognitoAuthSignOutRedirectUri' => 'myapp://SETME',
+  #     'CognitoAuthWebDomain' => 'https://SETME',
+  #     'CognitoUserPoolAppClientId' => 'SETME',
+  #     'CognitoUserPoolAppClientSecret' => 'SETME or Remove key if App client has no secret',
+  #     'CognitoAuthScopes' => ['openid']
+  #   }
+  # ]
   app.pods do
     pod 'SDWebImage'
+    pod 'AWSCore'
     pod 'AWSCognito'
-  #   pod 'JGProgressHUD'
-  #   pod 'SVProgressHUD'
-  #   pod "FontasticIcons"
+    pod 'AWSCognitoAuth'
+    #   pod 'JGProgressHUD'
+    #   pod 'SVProgressHUD'
+    #   pod "FontasticIcons"
   end
 
   app.development do

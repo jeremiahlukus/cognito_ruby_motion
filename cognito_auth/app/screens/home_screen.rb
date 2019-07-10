@@ -7,6 +7,7 @@ class HomeScreen < PM::Screen
     set_nav_bar_button :right, title: "Right", action: :nav_right_button
 
     @hello_world = append!(UILabel, :hello_world)
+    $q = ApiClient.load_response
   end
 
   def nav_left_button

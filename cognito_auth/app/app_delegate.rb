@@ -22,8 +22,16 @@ class AppDelegate < PM::Delegate
     open_tab_bar HomeScreen.new(nav_bar: true)#, HomeScreen.new(nav_bar: false)
   end
 
-  # Remove this if you are only supporting portrait
-  def application(application, willChangeStatusBarOrientation: new_orientation, duration: duration)
+  def application(application,  didFinishLaunchingWithOptions: launchOptions, willChangeStatusBarOrientation: new_orientation, duration: duration)
+    credentialsProvider = AWSCognitoCredentialsProvider.alloc.initWithRegionType(
+      AWSRegionUSEast1,
+      identityPoolId: 'us-east-1:fc903ee0-5978-41c1-b5ec-fa035d26c6b4'
+    )
+    configuration = AWSServiceConfiguration.alloc.initWithRegion(
+      AWSRegionUSEast1,
+      credentialsProvider: credentialsProvider
+    )
+    AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration
     # Manually set RMQ's orientation before the device is actually oriented
     # So that we can do stuff like style views before the rotation begins
     device.orientation = new_orientation

@@ -33,9 +33,15 @@ class SignInScreen < PM::XLFormScreen
     ]
   end
 
+
   def authenticate
+    # clientId 3mcdk545usdhekr76rclp6s7ct
+    #"us-east-1:fc903ee0-5978-41c1-b5ec-fa035d26c6b4", // Identity pool ID
+    #
     puts "your in"
+
     app.delegate.open_authenticated_root
+
     # Auth.sign_in(email: values["email"], password: values["password"]) do |response|
     #   if response.success?
     #     puts "Success"
