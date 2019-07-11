@@ -110,6 +110,7 @@ PLATFORMS
 
 DEPENDENCIES
   ProMotion-XLForm
+  RedAlert
   afmotion
   cdq
   motion-cocoapods

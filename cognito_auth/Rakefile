@@ -45,6 +45,7 @@ Motion::Project::App.setup do |app|
   # Or use all *.ttf fonts in the /resources/fonts directory:
   # app.fonts = Dir.glob("resources/fonts/*.ttf").map{|font| "fonts/#{font.split('/').last}"}
   # app.frameworks += %w(QuartzCore CoreGraphics MediaPlayer MessageUI CoreData)
+  # app.embedded_frameworks << './vendor/AWSMobileClient.framework'
 
   # app.vendor_project('vendor/Flurry', :static)
   # app.vendor_project('vendor/DSLCalendarView', :static, :cflags => '-fobjc-arc') # Using arc
@@ -62,8 +63,7 @@ Motion::Project::App.setup do |app|
   app.pods do
     pod 'SDWebImage'
     pod 'AWSCore'
-    pod 'AWSCognito'
-    pod 'AWSCognitoAuth'
+    pod 'AWSCognitoIdentityProvider'
     #   pod 'JGProgressHUD'
     #   pod 'SVProgressHUD'
     #   pod "FontasticIcons"
