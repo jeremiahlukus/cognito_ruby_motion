@@ -35,7 +35,6 @@ class AppDelegate < PM::Delegate
       userPoolConfiguration: cognitoConfiguration,
       forKey: "UserPool"
     )
-    #pool = [AWSCognitoIdentityUserPool CognitoIdentityUserPoolForKey:@"UserPool"];
     credentialsProvider = AWSCognitoCredentialsProvider.alloc.initWithRegionType(
       AWSRegionUSEast1,
       identityPoolId: 'us-east-1:fc903ee0-5978-41c1-b5ec-fa035d26c6b4',
@@ -45,12 +44,8 @@ class AppDelegate < PM::Delegate
        credentialsProvider: credentialsProvider
      )
     AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration
-
-    # AWSCognitoIdentityUserPool.alloc.register(
-    #   with: serviceConfiguration,
-    #   userPoolConfiguration: cognitoConfiguration,
-    #   forKey: 'userPoolID'
-    # )
+    pool = AWSCognitoIdentityUserPool.CognitoIdentityUserPoolForKey("UserPool")
+    pool.delegate = self
   end
 
   def open_authenticated_root
