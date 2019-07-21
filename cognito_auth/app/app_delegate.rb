@@ -9,22 +9,21 @@ class AppDelegate < PM::Delegate
 
   def on_load(app, options)
     cdq.setup # Remove this if you aren't using CDQ
-
-    setup_cognito
-    if false
-      header = { "Allow" => "*"}
-      ApiClient.update_authorization_header(header)
-      open_authenticated_root
-    else
-      open SignInScreen.new(nav_bar: true)
-    end
   end
 
+  def startPasswordAuthentication
+    mp "startPasswordAuthentication called"
+    open SignInScreen.new(nav_bar: true)
+  end
+
+
   def setup_cognito
+    mp "setup cognito called"
+    AWSDDLog.sharedInstance.logLevel = AWSLogLevelVerbose
     serviceConfiguration = AWSServiceConfiguration.alloc.initWithRegion(
-       AWSRegionUSEast1,
-       credentialsProvider: nil
-     )
+      AWSRegionUSEast1,
+      credentialsProvider: nil
+    )
     cognitoConfiguration = AWSCognitoIdentityUserPoolConfiguration.alloc.initWithClientId(
       CognitoIdentityUserPoolAppClientId,
       clientSecret: CognitoIdentityUserPoolAppClientSecret,
@@ -35,26 +34,15 @@ class AppDelegate < PM::Delegate
       userPoolConfiguration: cognitoConfiguration,
       forKey: "UserPool"
     )
-    credentialsProvider = AWSCognitoCredentialsProvider.alloc.initWithRegionType(
-      AWSRegionUSEast1,
-      identityPoolId: 'us-east-1:fc903ee0-5978-41c1-b5ec-fa035d26c6b4',
-    )
-   configuration = AWSServiceConfiguration.alloc.initWithRegion(
-       AWSRegionUSEast1,
-       credentialsProvider: credentialsProvider
-     )
-    AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration
-    pool = AWSCognitoIdentityUserPool.CognitoIdentityUserPoolForKey("UserPool")
-    pool.delegate = self
+    $pool = AWSCognitoIdentityUserPool.CognitoIdentityUserPoolForKey("UserPool")
+    $pool.delegate = self
   end
 
   def open_authenticated_root
-    open_tab_bar HomeScreen.new(nav_bar: true)#, HomeScreen.new(nav_bar: false)
+    open_tab_bar HomeScreen.new(nav_bar: true) #, HomeScreen.new(nav_bar: false)
   end
 
-  def application(application,  willChangeStatusBarOrientation: new_orientation, duration: duration)
-    # Manually set RMQ's orientation before the device is actually oriented
-    # So that we can do stuff like style views before the rotation begins
-    device.orientation = new_orientation
+  def application(application, didFinishLaunchingWithOptions: launchOptions)
+    setup_cognito
   end
 end

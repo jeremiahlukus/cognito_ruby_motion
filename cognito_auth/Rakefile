@@ -64,6 +64,7 @@ Motion::Project::App.setup do |app|
     pod 'SDWebImage'
     pod 'AWSCore'
     pod 'AWSCognitoIdentityProvider'
+    #pod 'AWSMobileClient'
     #   pod 'JGProgressHUD'
     #   pod 'SVProgressHUD'
     #   pod "FontasticIcons"
