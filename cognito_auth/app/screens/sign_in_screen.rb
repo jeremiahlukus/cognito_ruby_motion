@@ -36,6 +36,7 @@ class SignInScreen < PM::XLFormScreen
   def signInPressed
     $auth = AWSCognitoIdentityPasswordAuthenticationDetails.alloc
       .initWithUsername(values['email'], password: values['password'])
+    $passwordAuthenticationCompletion.result = $auth
   end
 
   def getPasswordAuthenticationDetails
