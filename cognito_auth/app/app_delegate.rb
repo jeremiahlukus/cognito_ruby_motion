@@ -9,9 +9,11 @@ class PoolDelegateHandler
     super
   end
 
-  def startPasswordAuthentication()
+  def startPasswordAuthentication
+    mp "setting screen callback"
     Dispatch::Queue.main.async do
       @screen_callback.call
+      open SignInScreen.new(nav_bar: true)
     end
   end
 end
@@ -47,18 +49,18 @@ class AppDelegate < PM::Delegate
   def setup_cognito
     mp "setup cognito called"
     AWSDDLog.sharedInstance.logLevel = AWSLogLevelVerbose
-    @serviceConfiguration = AWSServiceConfiguration.alloc.initWithRegion(
+    $serviceConfiguration = AWSServiceConfiguration.alloc.initWithRegion(
       CognitoIdentityUserPoolRegion,
       credentialsProvider: nil
     )
-    @cognitoConfiguration = AWSCognitoIdentityUserPoolConfiguration.alloc.initWithClientId(
+    $cognitoConfiguration = AWSCognitoIdentityUserPoolConfiguration.alloc.initWithClientId(
       CognitoIdentityUserPoolAppClientId,
       clientSecret: CognitoIdentityUserPoolAppClientSecret,
       poolId: CognitoIdentityUserPoolId
     )
     AWSCognitoIdentityUserPool.registerCognitoIdentityUserPoolWithConfiguration(
-      @serviceConfiguration,
-      userPoolConfiguration: @cognitoConfiguration,
+      $serviceConfiguration,
+      userPoolConfiguration: $cognitoConfiguration,
       forKey: "UserPool"
     )
     @pool = AWSCognitoIdentityUserPool.CognitoIdentityUserPoolForKey("UserPool")
@@ -70,9 +72,17 @@ class AppDelegate < PM::Delegate
   end
 
   def application(application, didFinishLaunchingWithOptions: launchOptions)
-    @pool_delegate_handler = PoolDelegateHandler.new(lambda { show_signin })
-    $app = self
-    setup_cognito
+    dictionary = NSDictionary.alloc.initWithDictionary({
+      'serviceClass' => AWSServiceConfiguration,
+      'awsCognitoIdentityClass' =>  AWSCognitoIdentityUserPool,
+
+    })
+    @cyalert = CYAlert.new
+    @cyalert.show(dictionary)
     true
+    # setup_cognito
+    # @pool_delegate_handler = PoolDelegateHandler.new(lambda { show_signin })
+    # $app = self
+    # true
   end
 end

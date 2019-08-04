@@ -10,6 +10,7 @@ Bundler.require
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings
+  app.vendor_project('vendor/CYAlert', :static)
   app.files << Dir.glob("./config/*.rb")
   app.name = 'cognito_auth'
   app.identifier = 'com.jparrack.cognito_auth'
@@ -60,10 +61,13 @@ Motion::Project::App.setup do |app|
   #     'CognitoAuthScopes' => ['openid']
   #   }
   # ]
+
+
   app.pods do
+    use_frameworks!
     pod 'SDWebImage'
-    pod 'AWSCore'
-    pod 'AWSCognitoIdentityProvider'
+    pod 'AWSCore', '~> 2.10.0'
+    pod 'AWSCognitoIdentityProvider', '~> 2.10.0'
     #pod 'AWSMobileClient'
     #   pod 'JGProgressHUD'
     #   pod 'SVProgressHUD'

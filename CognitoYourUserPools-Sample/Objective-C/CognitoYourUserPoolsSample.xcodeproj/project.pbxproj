@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7FFB50D83901048DF5A662CD /* Pods_CognitoYourUserPoolsSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A17077FE4829BB6D218B7EE /* Pods_CognitoYourUserPoolsSample.framework */; };
+		A16E7CF822F6666D00D5BC9E /* CYAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = A16E7CF722F6666D00D5BC9E /* CYAlert.m */; };
 		E441115C1FEDD6E600360598 /* AlertUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E441115B1FEDD6E600360598 /* AlertUser.m */; };
 		EF0AAFCB1DAD969300D7AAAC /* NewPasswordRequiredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0AAFCA1DAD969300D7AAAC /* NewPasswordRequiredViewController.m */; };
 		EF0AAFD21DADAACC00D7AAAC /* NewPasswordRequiredView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF0AAFD11DADAACC00D7AAAC /* NewPasswordRequiredView.xib */; };
@@ -64,6 +65,8 @@
 		1A17077FE4829BB6D218B7EE /* Pods_CognitoYourUserPoolsSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CognitoYourUserPoolsSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		254BC7B53C4640CD527AE555 /* Pods-CognitoYourUserPoolsSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CognitoYourUserPoolsSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CognitoYourUserPoolsSample/Pods-CognitoYourUserPoolsSample.debug.xcconfig"; sourceTree = "<group>"; };
 		60B058EBDDD22C803869875D /* Pods-CognitoYourUserPoolsSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CognitoYourUserPoolsSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CognitoYourUserPoolsSample/Pods-CognitoYourUserPoolsSample.release.xcconfig"; sourceTree = "<group>"; };
+		A16E7CF722F6666D00D5BC9E /* CYAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYAlert.m; sourceTree = "<group>"; };
+		A16E7CFA22F666B500D5BC9E /* CYAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYAlert.h; sourceTree = "<group>"; };
 		E441115B1FEDD6E600360598 /* AlertUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertUser.m; sourceTree = "<group>"; };
 		E441115D1FEDD70C00360598 /* AlertUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertUser.h; sourceTree = "<group>"; };
 		EF0AAFC91DAD969300D7AAAC /* NewPasswordRequiredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPasswordRequiredViewController.h; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 				EF2C03E21D90861D00FA232B /* CognitoYourUserPoolsSample.entitlements */,
 				EF1B27201CB7192F00556AB9 /* ConfirmForgotPasswordViewController.h */,
 				EF1B27211CB7192F00556AB9 /* ConfirmForgotPasswordViewController.m */,
+				A16E7CFA22F666B500D5BC9E /* CYAlert.h */,
+				A16E7CF722F6666D00D5BC9E /* CYAlert.m */,
 				EF66D4DB1CA337BF00380164 /* ConfirmSignUpViewController.h */,
 				EF66D4DC1CA337BF00380164 /* ConfirmSignUpViewController.m */,
 				EF41C2681CD4293E008E3F79 /* Constants.h */,
@@ -420,6 +425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A16E7CF822F6666D00D5BC9E /* CYAlert.m in Sources */,
 				EF0C02AD1CD170D900A9F279 /* ConfirmSignUpViewController.m in Sources */,
 				EF0C02AA1CD170D500A9F279 /* AppDelegate.m in Sources */,
 				EF0C02AB1CD170D600A9F279 /* UserDetailTableViewController.m in Sources */,

@@ -1,9 +1,12 @@
 class PoolDelegateHandler
   def initialize screen_callback
+    puts "init"
     @screen_callback = screen_callback
+    startPasswordAuthentication
   end
 
   def show_login_controller
+    puts "Login screen"
     @loginController = LoginController.alloc.init
     self.navigationController.pushViewController(@loginController, animated:true)
   end

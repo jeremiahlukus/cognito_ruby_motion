@@ -19,6 +19,7 @@
 #import "UserDetailTableViewController.h"
 #import "Constants.h"
 #import "AlertUser.h"
+#import "CYAlert.h"
 
 @interface AppDelegate ()
 @property (nonatomic,strong) AWSTaskCompletionSource<NSNumber *>* rememberDeviceCompletionSource;
@@ -33,50 +34,46 @@
     [AWSDDLog sharedInstance].logLevel = AWSLogLevelVerbose;
 
     //setup service config
-    AWSServiceConfiguration *serviceConfiguration = [[AWSServiceConfiguration alloc] initWithRegion:CognitoIdentityUserPoolRegion credentialsProvider:nil];
+    AWSServiceConfiguration *serviceConfiguration = [[AWSServiceConfiguration alloc] initWithRegion:1 credentialsProvider:nil];
     
-    if([@"YOUR_USER_POOL_ID" isEqualToString:CognitoIdentityUserPoolId]){
-        [AlertUser alertUser: self.window.rootViewController
-                        title:@"Invalid Configuration"
-                        message:@"Please configure user pool constants in Constants.m"
-                        buttonTitle:@"Ok"];
-    }
+
     
     //create a pool
-    AWSCognitoIdentityUserPoolConfiguration *configuration = [[AWSCognitoIdentityUserPoolConfiguration alloc] initWithClientId:CognitoIdentityUserPoolAppClientId  clientSecret:CognitoIdentityUserPoolAppClientSecret poolId:CognitoIdentityUserPoolId];
+//    AWSCognitoIdentityUserPoolConfiguration *configuration = [[AWSCognitoIdentityUserPoolConfiguration alloc] initWithClientId:@""  clientSecret:@"" poolId:@""];
     
-    [AWSCognitoIdentityUserPool registerCognitoIdentityUserPoolWithConfiguration:serviceConfiguration userPoolConfiguration:configuration forKey:@"UserPool"];
+    [AWSCognitoIdentityUserPool registerCognitoIdentityUserPoolWithConfiguration:serviceConfiguration userPoolConfiguration:nil forKey:@"UserPool"];
     
     AWSCognitoIdentityUserPool *pool = [AWSCognitoIdentityUserPool CognitoIdentityUserPoolForKey:@"UserPool"];
     
-    self.storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    pool.delegate = self;
-    
+    //self.storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    id cyalert = [[CYAlert alloc] init];
+    [pool setValue:cyalert
+            forKey:@"delegate"];
     return YES;
 }
 
 //set up password authentication ui to retrieve username and password from the user
--(id<AWSCognitoIdentityPasswordAuthentication>) startPasswordAuthentication {
-    
-    if(!self.navigationController){
-        self.navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"signinController"];
-    }
-    if(!self.signInViewController){
-        self.signInViewController = self.navigationController.viewControllers[0];
-    }
+-(id) startPasswordAuthentication {
+    NSLog(@"HEY");
+//    if(!self.navigationController){
+//        self.navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"signinController"];
+//    }
+//    if(!self.signInViewController){
+//        self.signInViewController = self.navigationController.viewControllers[0];
+//    }
     // happening on a seperate thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //rewind to login screen
-        [self.navigationController popToRootViewControllerAnimated:NO];
-        
-        //display login screen if it isn't already visibile
-        if(!(self.navigationController.isViewLoaded && self.navigationController.view.window))
-        {
-            [self.window.rootViewController presentViewController:self.navigationController animated:YES completion:nil];
-        }
-    });
-    return self.signInViewController;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        //rewind to login screen
+//        [self.navigationController popToRootViewControllerAnimated:NO];
+//
+//        //display login screen if it isn't already visibile
+//        if(!(self.navigationController.isViewLoaded && self.navigationController.view.window))
+//        {
+//            [self.window.rootViewController presentViewController:self.navigationController animated:YES completion:nil];
+//        }
+//    });
+//    return self.signInViewController;
+    return nil;
 }
 
 //set up mfa ui to retrieve mfa code from end user
