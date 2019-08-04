@@ -2,20 +2,11 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (3.0.0)
-    ProMotion (2.8.2)
-      methadone (~> 1.7)
-      motion_print (~> 1.0)
-    ProMotion-XLForm (0.0.18)
-      ProMotion (~> 2.0)
-      motion-cocoapods (~> 1.4)
     activesupport (4.2.11.1)
       i18n (~> 0.7)
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    afmotion (2.6)
-      motion-cocoapods (>= 1.4.1)
-      motion-require (>= 0.1)
     atomos (0.1.3)
     claide (1.0.2)
     cocoapods (1.7.5)
@@ -59,14 +50,10 @@ GEM
     gh_inspector (1.1.3)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-    methadone (1.9.5)
-      bundler
     minitest (5.11.3)
     molinillo (0.6.6)
     motion-cocoapods (1.10.0)
       cocoapods (>= 1.6.0, <= 1.8.0)
-    motion-require (0.2.0)
-    motion_print (1.2.0)
     nanaimo (0.2.6)
     nap (1.1.0)
     netrc (0.11.0)
@@ -89,9 +76,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ProMotion (~> 2.5)
-  ProMotion-XLForm
-  afmotion
   motion-cocoapods
   newclear
   rake

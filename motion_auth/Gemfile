@@ -4,8 +4,5 @@ gem 'rake'
 # Add your dependencies here:
 
 gem "motion-cocoapods"
-gem "afmotion" # Networking
+#gem "afmotion" # Networking
 gem "newclear" # Completely wipe out the simulator and rebuild
-gem "ProMotion", "~> 2.5"
-gem "ProMotion-XLForm" # Form screens
-

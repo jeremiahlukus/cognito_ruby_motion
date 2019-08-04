@@ -7,8 +7,12 @@ class PoolDelegateHandler
 
   def show_login_controller
     puts "Login screen"
-    @loginController = LoginController.alloc.init
-    self.navigationController.pushViewController(@loginController, animated:true)
+    @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
+    @login_controller = LoginController.alloc.init
+    @navigation_controller = UINavigationController.alloc.init
+    @navigation_controller.pushViewController(@login_controller, animated:false)
+    @window.rootViewController = @navigation_controller
+    @window.makeKeyAndVisible
   end
 
   # should get called magically
@@ -22,16 +26,13 @@ end
 
 class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
-    setup_cognito
-    rootViewController = UIViewController.alloc.init
-    rootViewController.title = 'motion_auth'
-    rootViewController.view.backgroundColor = UIColor.whiteColor
-    navigationController = UINavigationController.alloc.initWithRootViewController(rootViewController)
-    @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-    @window.rootViewController = navigationController
-    @window.makeKeyAndVisible
-    @pool_delegate_handler = PoolDelegateHandler.new(lambda { show_login_controller })
-    $app = self
+     dictionary = NSDictionary.alloc.initWithDictionary({
+       'serviceClass' => AWSServiceConfiguration,
+       'awsCognitoIdentityClass' =>  AWSCognitoIdentityUserPool
+     })
+     @cyalert = CYAlert.new
+     @cyalert.show(dictionary)
+    #setup_cognito
     true
   end
 
@@ -42,10 +43,6 @@ class AppDelegate
     end
   end
 
-  def show_login_controller
-    @loginController = LoginController.alloc.init
-    self.navigationController.pushViewController(@loginController, animated:true)
-  end
 
   def method_missing(m, *args)
     puts m

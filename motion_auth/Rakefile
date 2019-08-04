@@ -7,6 +7,8 @@ $:.unshift("~/.rubymotion/rubymotion-templates")
 # ===========================================================================================
 
 require 'motion/project/template/ios'
+require 'rubygems'
+require 'motion-cocoapods'
 
 begin
   require 'bundler'
@@ -20,12 +22,13 @@ end
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   define_icon_defaults!(app)
+  app.vendor_project('vendor/CYAlert', :static)
 
   app.files << Dir.glob("./config/*.rb")
 
   app.pods do
-    pod 'AWSCore'
-    pod 'AWSCognitoIdentityProvider'
+    pod 'AWSCore', '~> 2.10.0'
+    pod 'AWSCognitoIdentityProvider', '~> 2.10.0'
     pod 'SDWebImage'
   end
 
